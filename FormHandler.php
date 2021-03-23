@@ -1,12 +1,10 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 namespace FormGuide\Handlx;
 use FormGuide\PHPFormValidator\FormValidator;
 use PHPMailer;
 use FormGuide\Handlx\Microtemplate;
 use Gregwar\Captcha\CaptchaBuilder;
-
-
-
 
 /**
  * FormHandler 
@@ -48,6 +46,7 @@ class FormHandler
 		$this->mailer->Subject = "Poptávka";
 
 		$host = isset($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:'localhost';
+		$host .= "Content-Type: text/html; charset=utf-8\n";
         $from_email ='forms@'.$host;
    		$this->mailer->setFrom($from_email,'Contact Form',false);  
 
@@ -262,6 +261,7 @@ class FormHandler
 	private function compose_mail($post)
 	{
 		$content = "Obsah poptávky: \n\n";
+		$content .= "Content-Type: text/html; charset=utf-8\n";
 		foreach($post as $name=>$value)
 		{
 			$content .= ucwords($name).":\n";
